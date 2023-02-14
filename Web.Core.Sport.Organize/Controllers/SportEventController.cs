@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 using Web.Core.Sport.Organize.DTOs;
 using Web.Core.Sport.Organize.Interfaces;
 using Web.Core.Sport.Organize.Services;
@@ -9,18 +11,29 @@ namespace Web.Core.Sport.Organize.Controllers
     {
         private readonly GlobalService _globalService;
         private readonly ISportEventRepositories _sportEventRepositories;
+        private readonly IOrganizerRepositories _organizerRepositories;
 
-        public SportEventController(GlobalService globalService, ISportEventRepositories sportEventRepositories) : base(globalService)
+        public SportEventController(GlobalService globalService, ISportEventRepositories sportEventRepositories, IOrganizerRepositories organizerRepositories) : base(globalService)
         {
             this._globalService = globalService;
             this._sportEventRepositories = sportEventRepositories;
+            this._organizerRepositories = organizerRepositories;
         }
 
-        public IActionResult Index(int page = 1, int perPage = 10)
+        public IActionResult Index(int? organizerId = null, int page = 1, int perPage = 10)
         {
             if (string.IsNullOrEmpty(_globalService.Token)) return RedirectToAction("Login", "Account");
 
-            var model = _sportEventRepositories.GetSportEvent(page, perPage);
+            var model = _sportEventRepositories.GetSportEvent(page, perPage, organizerId);
+
+            var organizer = _organizerRepositories.GetOrganizers(1, 10);
+
+            ViewBag.Options = organizer.Data.Select(m => new SelectListItem
+            {
+                Value = m.ID.ToString(),
+                Text = m.OrganizerName
+            }).ToList();
+
             return View(model);
         }
 
@@ -28,6 +41,13 @@ namespace Web.Core.Sport.Organize.Controllers
         public IActionResult Create()
         {
             var model = new SportEventDTO();
+            var organizer = _organizerRepositories.GetOrganizers(1, 10);
+
+            ViewBag.Options = organizer.Data.Select(m => new SelectListItem
+            {
+                Value = m.ID.ToString(),
+                Text = m.OrganizerName
+            }).ToList();
             return View(model);
         }
         [HttpPost]
@@ -53,6 +73,15 @@ namespace Web.Core.Sport.Organize.Controllers
         public IActionResult Update(int id)
         {
             var model = _sportEventRepositories.GetSportEvent(id);
+
+            var organizer = _organizerRepositories.GetOrganizers(1, 10);
+
+            ViewBag.Options = organizer.Data.Select(m => new SelectListItem
+            {
+                Value = m.ID.ToString(),
+                Text = m.OrganizerName
+            }).ToList();
+
             return View(model);
         }
         [HttpPost]

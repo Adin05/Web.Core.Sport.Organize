@@ -1,0 +1,37 @@
+﻿@model Web.Core.Sport.Organize.DTOs.SportEventDTO;
+@{
+    ViewData["Title"] = "Create Sport Event";
+}
+
+<div class="container">
+    <div class="col-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="EventName" class="control-label"></label>
+                <input asp-for="EventName" class="form-control" />
+                <span asp-validation-for="EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventType" class="control-label"></label>
+                <input asp-for="EventType" class="form-control" />
+                <span asp-validation-for="EventType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventDate" class="control-label"></label>
+                <input asp-for="EventDate" class="form-control" />
+                <span asp-validation-for="EventDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganizerId" class="control-label"></label>
+                <select asp-for="OrganizerId" class="form-control" asp-items="ViewBag.Options"></select>
+                <span asp-validation-for="OrganizerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-secondary" asp-area="" asp-controller="SportEvent" asp-action="Index">Back</a>
+            </div>
+        </form>
+    </div>
+
+</div>
