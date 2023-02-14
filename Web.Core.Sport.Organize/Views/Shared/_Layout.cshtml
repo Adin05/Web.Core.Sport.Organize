@@ -24,14 +24,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Organizer" asp-action="Index">Organizer</a>
+                        </li>
                     </ul>
                 </div>
-                <div class="navbar-collapse ml-auto ">
+                <div class="navbar-collapse ml-auto " id="loginNav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
+                        <li class="nav-item" id="login-logout-link">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" id="register-profile-link">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                         </li>
                     </ul>
@@ -54,5 +57,29 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "/Account/GetLoginStatus",
+                success: function(isLoggedIn) {
+                    if (isLoggedIn) {
+                        $("#login-logout-link").html('<a class="nav-link text-dark" href="/Account/Logout">Logout</a>');
+                        $("#register-profile-link").html('<a class="nav-link text-dark" href="/User/Index">Profile</a>');
+                    }
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/Home/CheckIsSuccess",
+                success: function(isSuccess) {
+                    if (isSuccess) {
+                        alert("Process Success");
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

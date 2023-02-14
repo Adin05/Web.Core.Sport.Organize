@@ -1,10 +1,11 @@
-﻿using Web.Core.Sport.Organize.DTOs;
+﻿using System.Threading.Tasks;
+using Web.Core.Sport.Organize.DTOs;
 
 namespace Web.Core.Sport.Organize.Interfaces
 {
     public interface IAccountRepositories
     {
-        UserDTO Login(string username, string password);
-        UserDTO Register(RegisterDTO registerDTO);
+        Task<UserDTO> Login(string username, string password);
+        Task<RegisterResponseDTO> Register(RegisterDTO registerDTO);
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Web.Core.Sport.Organize.Interfaces;
 using Web.Core.Sport.Organize.Repositories;
+using Web.Core.Sport.Organize.Services;
 
 namespace Web.Core.Sport.Organize
 {
@@ -26,6 +27,10 @@ namespace Web.Core.Sport.Organize
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IAccountRepositories,AccountRepositories>();
+            services.AddSingleton<IUserRepositories,UserRepositories>();
+            services.AddSingleton<IOrganizerRepositories,OrganizerRepositories>();
+            services.AddSingleton<ISportEventRepositories,SportEventRepositories>();
+            services.AddSingleton<GlobalService>();
             services.AddControllersWithViews();
         }
 

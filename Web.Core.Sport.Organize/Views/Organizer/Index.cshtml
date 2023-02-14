@@ -1,0 +1,24 @@
+﻿@model List<Web.Core.Sport.Organize.Models.Organizer>
+@{
+    ViewData["Title"] = "Organizer";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.OrganizerName</td>
+                <td>@item.ImageLocation</td>
+            </tr>
+        }
+    </tbody>
+</table>
