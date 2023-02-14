@@ -6,7 +6,7 @@ namespace Web.Core.Sport.Organize.Interfaces
 {
     public interface ISportEventRepositories
     {
-        List<SportEvent> GetSportEvent();
+        ResponseSportEventDTO GetSportEvent(int page, int perPage);
         SportEvent GetSportEvent(int id);
         void Create(SportEventDTO SportEventDTO);
         void Update(SportEventDTO SportEventDTO);

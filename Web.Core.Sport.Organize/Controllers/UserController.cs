@@ -77,7 +77,7 @@ namespace Web.Core.Sport.Organize.Controllers
             try
             {
                 _userRepositories.Delete(_globalService.UserId);
-                return RedirectToAction("Logout", "Account");
+                return NoContent();
             }
             catch (System.Exception)
             {

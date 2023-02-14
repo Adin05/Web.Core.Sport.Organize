@@ -4,7 +4,7 @@
     var prev = 0;
     var next = 2;
     var links = Model.Meta.Pagination.Links;
-    if( links != null)
+    if (links != null)
     {
         if (links.Previous != null) prev = Convert.ToInt32(links.Previous.Substring(links.Previous.Length - 1));
         if (links.Next != null) next = Convert.ToInt32(links.Next.Substring(links.Next.Length - 1));
@@ -31,8 +31,8 @@
                 <td>@item.OrganizerName</td>
                 <td>@item.ImageLocation</td>
                 <th>
-                    <a class="btn btn-secondary" asp-area="" asp-controller="Organizer" asp-action="Update" asp-data-id="@item.ID">Detail</a>
-                    <button type="button" class="btn btn-danger"  onclick="deleteClick(@item.ID)">Delete</button>
+                    <a class="btn btn-secondary" asp-area="" asp-controller="Organizer" asp-action="Update" asp-route-id="@item.ID">Detail</a>
+                    <button type="button" class="btn btn-danger" onclick="deleteClick(@item.ID)">Delete</button>
                 </th>
             </tr>
         }
@@ -46,23 +46,21 @@
 @section Scripts {
 
     <script>
-        $(document).ready(function() {
-           let deleteClick = function(id) {
-                if (confirm("Are you sure you want to delete this item?")) {
-                    $.ajax({
-                        type: "GET",
-                        url: "/Organizer/Delete/"+ id,
-                        success: function(result) {
-                            alert("success delete");
-                            window.location = "/Organizer/Index";
-                        },
-                        error: function(xhr, ajaxOptions, thrownError) {
-                            // Handle error here
-                        }
-                    });
-                } else {
-                    // Do nothing if the user clicked "Cancel"
-                }
+        function deleteClick(id) {
+            if (confirm("Are you sure you want to delete this item?")) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Organizer/Delete/" + id,
+                    success: function(result) {
+                        alert("success delete");
+                        window.location = "/Organizer/Index";
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        // Handle error here
+                    }
+                });
+            } else {
+                // Do nothing if the user clicked "Cancel"
             }
         }
     </script>

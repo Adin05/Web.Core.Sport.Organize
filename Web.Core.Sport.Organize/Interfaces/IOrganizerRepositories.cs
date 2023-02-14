@@ -7,7 +7,7 @@ namespace Web.Core.Sport.Organize.Interfaces
     public interface IOrganizerRepositories
     {
         ResponseOrganizerDTO GetOrganizers(int page, int perPage);
-        Organizer GetOrganizer(int id);
+        OrganizerDTO GetOrganizer(int id);
         void Create(OrganizerDTO organizerDTO);
         void Update(OrganizerDTO organizerDTO);
         void Delete(int id);

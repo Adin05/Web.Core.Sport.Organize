@@ -1,0 +1,27 @@
+﻿@model Web.Core.Sport.Organize.DTOs.OrganizerDTO;
+@{
+    ViewData["Title"] = "Update Organizer";
+}
+
+<div class="container">
+    <div class="col-6">
+        <form method="post">
+            <input type="hidden" asp-for="ID" />
+             <div class="form-group">
+                <label asp-for="OrganizerName" class="control-label"></label>
+                <input asp-for="OrganizerName" class="form-control" />
+                <span asp-validation-for="OrganizerName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="ImageLocation" class="control-label"></label>
+                <input asp-for="ImageLocation" class="form-control" />
+                <span asp-validation-for="ImageLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+
+</div>
